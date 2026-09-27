@@ -129,7 +129,7 @@ export default function Hero() {
             </div>
 
             {/* Cosmic Stats Grid with 1000+ Solved */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-slate-800/80">
+            <div className="grid grid-cols-3 gap-3 pt-6 border-t border-slate-800/80">
               {HERO_STATS.map((stat, i) => (
                 <div
                   key={i}

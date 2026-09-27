@@ -10,7 +10,7 @@ export const PERSONAL_INFO = {
   email: "akashkumarprasad9335@gmail.com",
   phone: "+91-7667841789",
   location: "Allahabad / Noida, India",
-  resumeUrl: "https://drive.google.com/file/d/1ufswY8wL7sTO9OTZzBbNYA8Q2BA-P7I9/view?usp=sharing",
+  resumeUrl: "/resume.pdf",
   github: "https://github.com/Akashkrp",
   linkedin: "https://linkedin.com/in/akash-kumar-prasad",
   status: "Available for High-Impact Roles & Founding Ventures",
@@ -28,7 +28,6 @@ export const HERO_STATS = [
   { label: "LeetCode Rating", value: "1887", sub: "Knight Tier" },
   { label: "Problems Solved", value: "1000+", sub: "DSA & Algorithmic Rigor" },
   { label: "Codeforces", value: "1416", sub: "Specialist Rank" },
-  { label: "Institutions Indexed", value: "250K+", sub: "Data & AI Pipeline" },
 ];
 
 export const EXPERIENCES = [
@@ -38,7 +37,7 @@ export const EXPERIENCES = [
     company: "RekZon",
     badge: "Entrepreneurial Venture",
     type: "AI Recruitment Platform",
-    period: "2024 - Present",
+    period: "2026 - Present",
     location: "Remote / Hybrid",
     description: "Architected end-to-end AI infrastructure for automated recruitment screening, candidate matching, and real-time voice interviews.",
     highlights: [
