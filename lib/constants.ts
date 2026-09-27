@@ -1,147 +1,351 @@
-// Portfolio data constants
+// Portfolio data constants - Akash Kumar Prasad
 
 export const PERSONAL_INFO = {
   name: "Akash Kumar Prasad",
   shortName: "AKP",
-  title: "Full Stack Developer",
-  subtitle: "Building scalable web applications & solving complex algorithmic problems",
-  bio: "Pre-final year ECE student at MNNIT Allahabad (2023-2027) with a passion for MERN stack development and Data Structures & Algorithms. I thrive on building innovative solutions and tackling challenging problems.",
+  title: "AI Engineer & Full Stack Developer",
+  tagline: "Founding Engineer @ RekZon | Ex-SWE Intern (Data & AI) @ FreeFlow Advisors",
+  subtitle: "Architecting autonomous AI agents, enterprise RAG pipelines, and high-concurrency distributed systems across the digital cosmos.",
+  bio: "Pre-final year Electronics & Communication Engineering student at MNNIT Allahabad (2023-2027). Founding Engineer at RekZon building autonomous voice agents and LLM matching pipelines. Passionate about GenAI, Distributed Systems, and Competitive Programming (LeetCode Knight, 1887 with 1000+ solved).",
   email: "akashkumarprasad9335@gmail.com",
   phone: "+91-7667841789",
-  location: "MNNIT Allahabad",
+  location: "Allahabad / Noida, India",
   resumeUrl: "https://drive.google.com/file/d/1ufswY8wL7sTO9OTZzBbNYA8Q2BA-P7I9/view?usp=sharing",
   github: "https://github.com/Akashkrp",
-  linkedin: "https://www.linkedin.com/in/akash-kumar-prasad-519638283/",
+  linkedin: "https://linkedin.com/in/akash-kumar-prasad",
+  status: "Available for High-Impact Roles & Founding Ventures",
 };
 
 export const TYPING_ROLES = [
-  "Full Stack Developer",
-  "Competitive Programmer",
-  "Problem Solver",
-  "MERN Stack Enthusiast",
+  "Founding Engineer @ RekZon",
+  "AI & GenAI Systems Architect",
+  "Full Stack Systems Engineer",
+  "LeetCode Knight (1887 • 1000+ Solved)",
+  "Codeforces Specialist (1416)",
 ];
 
-export const EDUCATION = {
-  institution: "Motilal Nehru National Institute of Technology, Allahabad",
-  degree: "Bachelor of Technology in Electronics and Communication Engineering",
-  duration: "2023 - 2027",
-};
+export const HERO_STATS = [
+  { label: "LeetCode Rating", value: "1887", sub: "Knight Tier" },
+  { label: "Problems Solved", value: "1000+", sub: "DSA & Algorithmic Rigor" },
+  { label: "Codeforces", value: "1416", sub: "Specialist Rank" },
+  { label: "Institutions Indexed", value: "250K+", sub: "Data & AI Pipeline" },
+];
 
-export const SKILLS = {
-  "Languages": ["C++", "C", "JavaScript"],
-  "Web Technologies": ["React.js", "Node.js", "Express.js", "HTML", "CSS"],
-  "Databases": ["MongoDB", "MySQL"],
-  "Tools": ["Git", "GitHub", "Postman", "VS Code"],
-  "Core": ["DSA", "OOP", "DBMS", "OS"],
-};
+export const EXPERIENCES = [
+  {
+    id: "rekzon",
+    role: "Founding Engineer",
+    company: "RekZon",
+    badge: "Entrepreneurial Venture",
+    type: "AI Recruitment Platform",
+    period: "2024 - Present",
+    location: "Remote / Hybrid",
+    description: "Architected end-to-end AI infrastructure for automated recruitment screening, candidate matching, and real-time voice interviews.",
+    highlights: [
+      "Engineered LLM-based JD-candidate matching, dynamically weighting extracted requirements to auto-score candidates with explainable rubrics.",
+      "Built an interview evaluation pipeline using Deepgram STT + Claude Haiku 4.5 scoring for automated assessment and behavioral analysis.",
+      "Engineered candidate enrichment pipeline using multiple waterfall providers, resolving deduplication & contact intelligence.",
+      "Built vector search infrastructure using pgvector and Supabase, storing candidate embeddings for ultra-fast semantic JD matching.",
+      "Architected an autonomous voice agent using Gemini 2.5 Flash for recruitment screening & auto-evaluating candidate responses in real time.",
+    ],
+    tech: ["Gemini 2.5 Flash", "Claude Haiku 4.5", "Deepgram STT", "pgvector", "Supabase", "LangChain", "Vector Search", "Python", "FastAPI"],
+    featured: true,
+  },
+  {
+    id: "freeflow",
+    role: "Software Engineering Intern – Data & AI",
+    company: "FreeFlow Advisors",
+    badge: "Industry Production",
+    type: "Data & AI Systems",
+    period: "March 2026 - May 2026",
+    location: "Noida, India",
+    description: "Engineered large-scale data aggregation, entity resolution, and semantic discovery pipelines for national education intelligence.",
+    highlights: [
+      "Engineered concurrent web-scraping & OCR pipelines to aggregate data from 250K+ Indian educational institutions across heterogeneous sources.",
+      "Built entity-resolution pipeline via LLM extraction, embeddings, and classification to normalize data across heterogeneous schemas.",
+      "Developed semantic search & recommendation system via vector search & dense embeddings for personalized institutional discovery.",
+    ],
+    tech: ["Python", "OCR Pipelines", "Vector Search", "LLM Extraction", "Embeddings", "FastAPI", "Distributed Workers"],
+    featured: true,
+  },
+];
 
+export const EDUCATION_LIST = [
+  {
+    institution: "Motilal Nehru National Institute of Technology (MNNIT) Allahabad",
+    degree: "Bachelor of Technology in Electronics and Communication Engineering",
+    duration: "2023 - 2027",
+    location: "Allahabad, Uttar Pradesh",
+    highlights: [
+      "Focusing on Core CS: Data Structures & Algorithms, Operating Systems, Computer Networks, DBMS, and OOP",
+      "Active participant in technical societies, hackathons, and competitive programming clubs",
+    ],
+  },
+  {
+    institution: "D.A.V. Public School",
+    degree: "Senior Secondary (CBSE - Class XII)",
+    duration: "2022 - 2023",
+    location: "Jamshedpur, Jharkhand",
+    highlights: [
+      "Majors in Physics, Chemistry, and Mathematics",
+      "Strong foundation in algorithmic reasoning and scientific problem solving",
+    ],
+  },
+  {
+    institution: "D.A.V. Public School",
+    degree: "Secondary (CBSE - Class X)",
+    duration: "2020 - 2021",
+    location: "Jamshedpur, Jharkhand",
+    highlights: [
+      "All-round academic excellence and computational science distinction",
+    ],
+  },
+];
+
+export const SKILL_CATEGORIES = [
+  {
+    category: "Languages",
+    skills: ["C++", "C", "JavaScript", "TypeScript", "Python"],
+  },
+  {
+    category: "AI / GenAI",
+    skills: [
+      "LLM Integration",
+      "RAG Pipelines",
+      "Prompt Engineering",
+      "Structured Outputs",
+      "LangChain",
+      "Vector Embeddings",
+      "Semantic Search",
+      "HuggingFace",
+      "Deepgram STT",
+      "Gemini 2.5 Flash",
+      "Claude Haiku 4.5",
+    ],
+  },
+  {
+    category: "Full-Stack & Backend",
+    skills: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "WebSockets",
+      "JWT Authentication",
+      "Tailwind CSS",
+      "Next.js",
+    ],
+  },
+  {
+    category: "Databases",
+    skills: ["MongoDB", "MySQL", "PostgreSQL", "Pinecone", "pgvector (Supabase)"],
+  },
+  {
+    category: "Infrastructure & Tools",
+    skills: ["Docker", "Linux", "Git", "GitHub", "Postman", "VS Code"],
+  },
+  {
+    category: "Core CS",
+    skills: [
+      "Data Structures & Algorithms",
+      "OOP",
+      "DBMS",
+      "Operating Systems",
+      "Computer Networks",
+      "Complexity Analysis",
+    ],
+  },
+];
+
+// Preserves existing projects (Clinico, Hirebotix, Medidose) and adds MahabharatGPT & StockLabs
 export const PROJECTS = [
   {
-    id: 1,
+    id: "mahabharat-gpt",
+    title: "MahabharatGPT",
+    subtitle: "Persona-Grounded RAG Chatbot",
+    category: "AI / GenAI",
+    description: "End-to-end Retrieval-Augmented Generation (RAG) pipeline in LangChain (LCEL) grounding LLM responses in 27 source books for first-person persona dialogue.",
+    tech: ["Python", "Flask", "LangChain", "Groq", "Pinecone", "Hugging Face Embeddings", "Docker", "NLP"],
+    features: [
+      "Built an end-to-end RAG pipeline in LangChain (LCEL) grounding LLM responses in 27 source books for 27 distinct Mahabharata personas",
+      "Ingestion pipeline extracting 800-char overlapping chunks embedded into Pinecone via 384-dim MiniLM sentence-transformers",
+      "Designed a name-biased semantic retrieval strategy over a shared vector pool preserving cross-character context",
+      "Cut hallucinations by enforcing a grounding-first prompt with per-response source-document citations traceable to specific books",
+    ],
+    github: "https://github.com/Akashkrp",
+    demo: "https://github.com/Akashkrp",
+    date: "2025",
+    stats: "27 Personas • 384-dim Embeddings • Pinecone Vector DB",
+    featured: true,
+  },
+  {
+    id: "stocklabs",
+    title: "StockLabs",
+    subtitle: "Real-time Stock Market Tracker with AI Insights",
+    category: "Full Stack",
+    description: "Ultra-fast live stock analytics platform streaming real-time market data with low-latency WebSockets, Upstox OAuth, and automated AI financial insights.",
+    tech: ["React.js", "Express.js", "MongoDB", "WebSockets", "Upstox API", "YFinance API", "REST APIs"],
+    features: [
+      "Engineered a Node.js pub/sub WebSocket engine using Sets to stream targeted live ticker data, minimizing React re-renders",
+      "Reduced live market update latency by 40% through WebSocket-driven streaming pipelines",
+      "Scalable Node.js backend supporting Upstox OAuth token management, financial aggregation, and data scraping",
+      "Integrated AI backend services delivering automated portfolio insights, stock recommendations, and financial chatbot",
+      "In-memory Node caching layer for RSS financial news feeds, drastically lowering latency",
+    ],
+    github: "https://github.com/Akashkrp",
+    demo: "https://github.com/Akashkrp",
+    date: "2025",
+    stats: "40% Latency Drop • Pub/Sub WebSockets • Upstox OAuth",
+    featured: true,
+  },
+  {
+    id: "clinico",
     title: "Clinico",
-    description: "Secure digital healthcare platform with real-time appointment booking and payment processing",
+    subtitle: "Enterprise Digital Healthcare Platform",
+    category: "Full Stack",
+    description: "Secure digital healthcare platform with real-time appointment booking, role-based workflows, and idempotent payment processing.",
     tech: ["Node.js", "Express", "MongoDB", "React", "Stripe", "Razorpay"],
     features: [
-      "Idempotent payment APIs ensuring zero duplicate transactions",
-      "JWT-based role authentication (doctor/patient/admin)",
-      "Indexed MongoDB queries achieving 40% faster response times",
-      "Secure transaction handling with fraud checks and backend recovery"
+      "Idempotent payment APIs ensuring zero duplicate transactions across Stripe & Razorpay gateways",
+      "Granular JWT-based role authentication separating doctor, patient, and administrator workflows",
+      "Indexed MongoDB query execution achieving 40% faster response times under concurrent loads",
+      "Secure transaction handling with proactive fraud checks and backend automated recovery routines",
     ],
     github: "https://github.com/satyamgitsat2944/Clinico",
     demo: "https://github.com/satyamgitsat2944/Clinico",
-    date: "February 2025"
+    date: "February 2025",
+    stats: "Idempotent Payments • 40% Faster Queries • JWT RBAC",
+    featured: true,
   },
   {
-    id: 2,
-    title: "Medidose",
-    description: "AI-driven medication adherence platform with intelligent risk analysis",
-    tech: ["MERN", "Groq SDK", "Node-cron", "Twilio", "WhatsApp API"],
-    features: [
-      "AI-powered risk analysis using Groq SDK for accurate predictions",
-      "Fault-tolerant schedulers with node-cron for reliable timers",
-      "Multi-channel alerts via SMS and WhatsApp",
-      "Automated patient monitoring and adherence tracking"
-    ],
-    github: "https://github.com/Akashkrp/MediDose",
-    demo: "https://www.youtube.com/watch?v=QyM6PM0NbXg",
-    date: "October 2025"
-  },
-  {
-    id: 3,
+    id: "hirebotix",
     title: "Hirebotix",
-    description: "Scalable recruitment management platform for employers and job seekers",
-    tech: ["MERN", "Cloudinary", "Redux Toolkit", "Nodemailer"],
+    subtitle: "Scalable Recruitment Management Engine",
+    category: "Full Stack",
+    description: "End-to-end recruitment management ecosystem empowering employers and applicants with streamlined tracking and cloud profile management.",
+    tech: ["MERN", "Cloudinary", "Redux Toolkit", "Nodemailer", "REST APIs"],
     features: [
-      "Profile management with Cloudinary integration",
-      "Redux Toolkit reducing redundant API calls by 25%",
-      "Real-time job application tracking",
-      "Clean, accessible UI with optimized REST APIs"
+      "Cloud candidate profile management with seamless Cloudinary media storage & optimization",
+      "Redux Toolkit client-side caching reducing redundant network requests by 25%",
+      "Real-time applicant tracking pipeline with automated email notifications via Nodemailer",
+      "Clean, accessible responsive UI backed by resilient REST APIs and token authentication",
     ],
     github: "https://github.com/Akashkrp/HIREBOTIX",
     demo: "https://hirebotix-frontend.onrender.com/",
-    date: "November 2024"
-  }
+    date: "November 2024",
+    stats: "25% Less Network Calls • Cloudinary Storage • Real-time ATS",
+    featured: true,
+  },
+  {
+    id: "medidose",
+    title: "Medidose",
+    subtitle: "AI Medication Adherence System",
+    category: "AI / GenAI",
+    description: "AI-driven medication adherence platform with intelligent risk analysis and multi-channel automated reminders.",
+    tech: ["MERN", "Groq SDK", "Node-cron", "Twilio", "WhatsApp API"],
+    features: [
+      "AI-powered risk analysis using Groq SDK for instant patient compliance prediction",
+      "Fault-tolerant distributed schedulers built with node-cron for dependable medication timers",
+      "Multi-channel automated alerting through SMS and WhatsApp messaging channels",
+      "Automated patient adherence tracking and health progress monitoring",
+    ],
+    github: "https://github.com/Akashkrp/MediDose",
+    demo: "https://www.youtube.com/watch?v=QyM6PM0NbXg",
+    date: "October 2025",
+    stats: "Groq AI Inference • WhatsApp & SMS • Fault-tolerant Cron",
+    featured: false,
+  },
 ];
 
 export const CODING_PROFILES = [
   {
     platform: "LeetCode",
     username: "Akp_23",
-    tier: "Knight",
+    tier: "Knight Tier",
     rating: 1887,
-    problemsSolved: "700+",
+    problemsSolved: "1000+",
     url: "https://leetcode.com/u/Akp_23/",
-    color: "neon-cyan",
-    icon: "Trophy"
+    badge: "Top ~4% Globally",
+    accent: "sky",
+    highlight: "Knight Tier with 1000+ DSA problems solved and contest rating of 1887.",
   },
   {
     platform: "Codeforces",
     username: "Akash_krp",
-    tier: "Pupil",
-    rating: 1390,
+    tier: "Specialist",
+    rating: 1416,
     problemsSolved: "300+",
     url: "https://codeforces.com/profile/Akash_krp",
-    color: "electric-purple",
-    icon: "Award"
-  }
+    badge: "Specialist Rank",
+    accent: "violet",
+    highlight: "Specialist on Codeforces with maximum rating of 1416 and 300+ competitive solutions.",
+  },
 ];
 
 export const ACHIEVEMENTS = [
   {
     id: 1,
-    title: "Flipkart Grid 7.0",
-    description: "Qualified for Round 2, placing in the top 10% out of 1.6 lakh+ participants",
-    date: "July 2025",
-    icon: "Star"
+    title: "Advitiya Hackathon (IIT Ropar)",
+    rank: "Finalist (4th Position)",
+    description: "Secured 4th position out of 130+ teams nationwide in Advitiya Hackathon at IIT Ropar.",
+    date: "February 2025",
+    category: "Hackathon",
+    badge: "Top 3%",
   },
   {
     id: 2,
-    title: "LeetCode Biweekly Contest",
-    description: "Achieved Global Rank 705 out of 31,000+ participants",
-    date: "July 2024",
-    icon: "Medal"
+    title: "Smart India Hackathon (SIH)",
+    rank: "Pre-finalist (Top 3)",
+    description: "Pre-finalist and ranked among Top 3 in internal university Hackathon for national representation.",
+    date: "September 2025",
+    category: "National Contest",
+    badge: "Top 3 MNNIT",
   },
   {
     id: 3,
-    title: "Advitiya Hackathon (IIT Ropar)",
-    description: "Secured 4th position out of 130+ teams as finalist",
-    date: "February 2025",
-    icon: "Trophy"
+    title: "Web Development Hackathon (Codesangam, MNNIT)",
+    rank: "2nd Runner-up (3rd Position)",
+    description: "Achieved 3rd position in official web development hackathon under Codesangam at MNNIT Allahabad.",
+    date: "2024",
+    category: "Hackathon",
+    badge: "Podium Finish",
   },
   {
     id: 4,
-    title: "Smart India Hackathon",
-    description: "Pre-finalist among top 3 teams in internal hackathon",
-    date: "September 2025",
-    icon: "Award"
-  }
+    title: "Development Hackathon (Jadavpur University)",
+    rank: "Semi-finalist (Top 20)",
+    description: "Selected among top 20 teams out of 330+ participating teams in Development Hackathon at Jadavpur University.",
+    date: "2024",
+    category: "Hackathon",
+    badge: "Top 6%",
+  },
+  {
+    id: 5,
+    title: "LeetCode Biweekly Contest",
+    rank: "Global Rank 705",
+    description: "Ranked 705 globally out of 31,000+ international competitive programmers in LeetCode Biweekly Contest.",
+    date: "July 2024",
+    category: "Competitive Programming",
+    badge: "Global Top 2.2%",
+  },
+  {
+    id: 6,
+    title: "Flipkart Grid 7.0",
+    rank: "Qualified Round 2",
+    description: "Placed in the top 10% out of 1.6 lakh+ participants across India, advancing to Round 2.",
+    date: "July 2025",
+    category: "National Challenge",
+    badge: "Top 10% of 160K+",
+  },
 ];
 
 export const NAV_LINKS = [
   { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
+  { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
+  { name: "Skills", href: "#skills" },
+  { name: "Badges", href: "#coding-profiles" },
   { name: "Achievements", href: "#achievements" },
+  { name: "Education", href: "#education" },
   { name: "Contact", href: "#contact" },
 ];

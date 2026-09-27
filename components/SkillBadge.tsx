@@ -1,33 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
-import * as LucideIcons from "lucide-react";
 
 interface SkillBadgeProps {
-    name: string;
-    index: number;
+  name: string;
+  index: number;
 }
 
 export default function SkillBadge({ name, index }: SkillBadgeProps) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{
-                duration: 0.4,
-                delay: index * 0.05,
-                ease: "easeOut",
-            }}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="glass glass-hover p-4 rounded-xl flex items-center gap-3 cursor-default group"
-        >
-            <div className="p-2 bg-gradient-to-br from-neon-cyan/20 to-electric-purple/20 rounded-lg group-hover:from-neon-cyan/40 group-hover:to-electric-purple/40 transition-all duration-300">
-                <div className="w-6 h-6 bg-gradient-to-br from-neon-cyan to-electric-purple rounded"></div>
-            </div>
-            <span className="font-medium text-gray-200 group-hover:text-white transition-colors">
-                {name}
-            </span>
-        </motion.div>
-    );
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9, y: 15 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.35,
+        delay: Math.min(index * 0.03, 0.4),
+        ease: "easeOut",
+      }}
+      whileHover={{ y: -3, scale: 1.02 }}
+      className="group relative p-3 sm:p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/90 hover:border-sky-400/50 hover:bg-slate-900/80 transition-all duration-200 flex items-center gap-2.5 backdrop-blur-md cursor-default shadow-md hover:shadow-sky-500/10"
+    >
+      <div className="w-1.5 h-1.5 rounded-full bg-sky-400 group-hover:shadow-[0_0_8px_#38bdf8] transition-shadow duration-200 flex-shrink-0" />
+      <span className="text-xs sm:text-sm font-mono text-slate-200 group-hover:text-sky-300 font-medium transition-colors">
+        {name}
+      </span>
+    </motion.div>
+  );
 }

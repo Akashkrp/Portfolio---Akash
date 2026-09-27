@@ -1,74 +1,88 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, Medal, Trophy, Award } from "lucide-react";
+import { Trophy, Award } from "lucide-react";
 import { ACHIEVEMENTS } from "@/lib/constants";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-const iconMap = {
-    Star,
-    Medal,
-    Trophy,
-    Award,
-};
-
 export default function Achievements() {
-    const { ref, isInView } = useScrollReveal();
+  const { ref, isInView } = useScrollReveal();
 
-    return (
-        <section id="achievements" ref={ref} className="relative z-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-4xl sm:text-5xl font-bold mb-4 font-['Space_Grotesk']">
-                        <span className="gradient-text">Achievements</span> & Awards
-                    </h2>
-                    <div className="h-1 w-24 bg-gradient-to-r from-neon-cyan to-electric-purple mx-auto rounded-full"></div>
-                    <p className="text-gray-400 mt-4 text-lg">
-                        Recognition and milestones
-                    </p>
-                </motion.div>
+  return (
+    <section id="achievements" ref={ref} className="relative z-10 py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-950/80 border border-sky-400/25 text-sky-300 text-xs font-mono uppercase tracking-widest mb-4 backdrop-blur-xl">
+            <Award size={14} className="text-sky-400" />
+            <span>Honors, Competitions & Hackathons</span>
+          </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                    {ACHIEVEMENTS.map((achievement, index) => {
-                        const Icon = iconMap[achievement.icon as keyof typeof iconMap];
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-['Space_Grotesk'] text-white">
+            Milestones & <span className="gradient-text">Achievements</span>
+          </h2>
+          <div className="h-1 w-24 bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+          <p className="text-slate-400 mt-4 text-base sm:text-lg max-w-2xl mx-auto">
+            Recognitions across premier national hackathons, competitive programming challenges, and institutional contests.
+          </p>
+        </motion.div>
 
-                        return (
-                            <motion.div
-                                key={achievement.id}
-                                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                whileHover={{ y: -5 }}
-                                className="glass glass-hover p-6 rounded-xl flex gap-4 items-start group"
-                            >
-                                <div className="p-3 bg-gradient-to-br from-neon-cyan to-electric-purple rounded-lg flex-shrink-0 group-hover:animate-glow">
-                                    <Icon size={24} className="text-white" />
-                                </div>
+        {/* Achievements Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {ACHIEVEMENTS.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              whileHover={{ y: -5 }}
+              className="group relative p-6 sm:p-7 rounded-2xl bg-gradient-to-b from-slate-950/90 via-[#070c1f]/80 to-[#040715]/90 border border-slate-800/80 hover:border-sky-400/40 transition-all duration-300 backdrop-blur-2xl flex flex-col justify-between shadow-xl hover:shadow-sky-500/10"
+            >
+              {/* Top ambient highlight line */}
+              <div className="absolute inset-x-0 -top-px h-[2px] bg-gradient-to-r from-transparent via-sky-400 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                                <div className="flex-grow">
-                                    <div className="flex items-start justify-between mb-2">
-                                        <h3 className="text-xl font-bold text-white group-hover:text-neon-cyan transition-colors">
-                                            {achievement.title}
-                                        </h3>
-                                        <span className="text-sm text-gray-500 whitespace-nowrap ml-2">
-                                            {achievement.date}
-                                        </span>
-                                    </div>
-                                    <p className="text-gray-400 leading-relaxed">
-                                        {achievement.description}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <span className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-300 border border-sky-400/25">
+                    {item.badge}
+                  </span>
+                  <span className="text-xs font-mono text-slate-500">{item.date}</span>
                 </div>
-            </div>
-        </section>
-    );
+
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="p-2.5 rounded-xl bg-gradient-to-br from-sky-500/15 to-indigo-500/15 text-sky-300 border border-sky-400/25 flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <Trophy size={18} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white group-hover:text-sky-300 transition-colors leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs font-mono text-indigo-400 font-semibold mt-0.5">
+                      {item.rank}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-slate-300 text-sm leading-relaxed mt-2">
+                  {item.description}
+                </p>
+              </div>
+
+              <div className="pt-4 mt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-500">
+                <span>{item.category}</span>
+                <span className="text-sky-400 group-hover:translate-x-1 transition-transform">
+                  Verified ✓
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
