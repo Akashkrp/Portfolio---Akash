@@ -131,7 +131,7 @@ function ProjectCard({ project, index, flip }: { project: Project; index: number
         <p className="mt-2 text-text/80">{project.subtitle}</p>
         <p className={`mt-5 leading-relaxed text-muted ${feature ? "text-lg" : ""}`}>{project.description}</p>
 
-        <p className="mt-5 font-mono text-xs leading-relaxed text-ice/70">{project.stats}</p>
+        <p className="mt-5 border-l-2 border-ion/50 pl-3 text-sm leading-relaxed text-ice">{project.stats}</p>
 
         <AnimatePresence initial={false}>
           {open && (
@@ -210,7 +210,7 @@ export default function Projects() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Things I've launched"
-          intro="RAG systems, real-time market streams, and production platforms with payments. Every featured project is live, so try them out."
+          intro="Problems I wanted solved, and the products I built to solve them. The featured ones are live, so try them."
         />
         <div className="grid grid-cols-1 gap-5 perspective-[1400px] lg:grid-cols-6">
           {featured.map((p, i) => (
