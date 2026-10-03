@@ -4,9 +4,9 @@ export const PERSONAL_INFO = {
   name: "Akash Kumar Prasad",
   shortName: "AKP",
   title: "AI Engineer & Full Stack Developer",
-  tagline: "Founding Engineer @ RekZon | Ex-SWE Intern (Data & AI) @ FreeFlow Advisors",
+  tagline: "AI Engineering Intern @ Tectonic Agents | Founding Engineer @ RekZon",
   subtitle: "Architecting autonomous AI agents, enterprise RAG pipelines, and high-concurrency distributed systems across the digital cosmos.",
-  bio: "Pre-final year Electronics & Communication Engineering student at MNNIT Allahabad (2023-2027). Founding Engineer at RekZon building autonomous voice agents and LLM matching pipelines. Passionate about GenAI, Distributed Systems, and Competitive Programming (LeetCode Knight, 1887 with 1000+ solved).",
+  bio: "Final year Electronics & Communication Engineering student at MNNIT Allahabad (2023-2027). Founding Engineer at RekZon building autonomous voice agents and LLM matching pipelines. Passionate about GenAI, Distributed Systems, and Competitive Programming (LeetCode Knight, 1887 with 1000+ solved).",
   email: "akashkumarprasad9335@gmail.com",
   phone: "+91-7667841789",
   location: "Allahabad / Noida, India",
@@ -17,6 +17,7 @@ export const PERSONAL_INFO = {
 };
 
 export const TYPING_ROLES = [
+  "AI Engineering Intern @ Tectonic Agents",
   "Founding Engineer @ RekZon",
   "AI & GenAI Systems Architect",
   "Full Stack Systems Engineer",
@@ -31,6 +32,23 @@ export const HERO_STATS = [
 ];
 
 export const EXPERIENCES = [
+  {
+    id: "tectonic",
+    role: "AI Engineering Intern",
+    company: "Tectonic Agents",
+    badge: "Current",
+    type: "LLM Agents for Engineering Data",
+    period: "October 2026 - Present",
+    location: "Bengaluru (Remote)",
+    description: "Building a retrieval-augmented chat agent that answers questions over structured engineering data, with every claim traced back to its source.",
+    highlights: [
+      "Developed an LLM-powered RAG chat agent in Python and FastAPI, using tool calling over structured engineering data.",
+      "Implemented a hallucination-guard layer tracing every number and citation to sources, with 100+ automated pytest tests.",
+      "Built REST and SSE streaming APIs and a JavaScript chat interface with caching, BM25 search, and source citation viewers.",
+    ],
+    tech: ["Python", "FastAPI", "RAG", "Tool Calling", "SSE Streaming", "BM25", "pytest", "JavaScript"],
+    featured: true,
+  },
   {
     id: "rekzon",
     role: "Founding Engineer",
@@ -133,6 +151,8 @@ export const SKILL_CATEGORIES = [
       "JWT Authentication",
       "Tailwind CSS",
       "Next.js",
+      "HTML",
+      "CSS",
     ],
   },
   {
@@ -141,7 +161,7 @@ export const SKILL_CATEGORIES = [
   },
   {
     category: "Infrastructure & Tools",
-    skills: ["Docker", "Linux", "Git", "GitHub", "Postman", "VS Code"],
+    skills: ["Docker", "Linux", "Git", "GitHub", "Postman", "VS Code", "Claude Code"],
   },
   {
     category: "Core CS",
@@ -200,20 +220,20 @@ export const PROJECTS = [
   {
     id: "clinico",
     title: "Clinico",
-    subtitle: "Enterprise Digital Healthcare Platform",
+    subtitle: "Healthcare Appointment Management Platform",
     category: "Full Stack",
     description: "Secure digital healthcare platform with real-time appointment booking, role-based workflows, and idempotent payment processing.",
-    tech: ["Node.js", "Express", "MongoDB", "React", "Stripe", "Razorpay"],
+    tech: ["Node.js", "Express.js", "MongoDB", "React.js", "JWT", "Stripe", "Razorpay", "Cloudinary", "Mongoose"],
     features: [
-      "Idempotent payment APIs ensuring zero duplicate transactions across Stripe & Razorpay gateways",
-      "Granular JWT-based role authentication separating doctor, patient, and administrator workflows",
-      "Indexed MongoDB query execution achieving 40% faster response times under concurrent loads",
-      "Secure transaction handling with proactive fraud checks and backend automated recovery routines",
+      "Built and optimized RESTful APIs using Express.js and MongoDB for authentication, booking, and payment processing",
+      "Built JWT-based RBAC middleware to enforce secure permission boundaries across doctor, patient, and admin endpoints",
+      "Optimized appointment search using indexed MongoDB queries, reducing overall database lookup latency by 50%",
+      "Integrated Stripe and Razorpay payment gateways with backend verification, transaction validation, and failure handling",
     ],
     github: "https://github.com/satyamgitsat2944/Clinico",
     demo: "https://github.com/satyamgitsat2944/Clinico",
     date: "February 2025",
-    stats: "Idempotent Payments • 40% Faster Queries • JWT RBAC",
+    stats: "50% Faster Lookups • JWT RBAC • Stripe & Razorpay",
     featured: true,
   },
   {
@@ -339,12 +359,11 @@ export const ACHIEVEMENTS = [
 ];
 
 export const NAV_LINKS = [
-  { name: "Home", href: "#home" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
-  { name: "Badges", href: "#coding-profiles" },
-  { name: "Achievements", href: "#achievements" },
-  { name: "Education", href: "#education" },
+  { name: "Rankings", href: "#coding-profiles" },
+  { name: "Awards", href: "#achievements" },
+  { name: "About", href: "#about" },
   { name: "Contact", href: "#contact" },
 ];

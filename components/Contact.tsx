@@ -1,118 +1,157 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, MessageSquareCode, Terminal } from "lucide-react";
+import { useState, type FormEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Copy, Check, Github, Linkedin, Phone, Send } from "lucide-react";
 import { PERSONAL_INFO } from "@/lib/constants";
-import ContactForm from "./ContactForm";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function Contact() {
-  const { ref, isInView } = useScrollReveal();
+  const [copied, setCopied] = useState(false);
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(PERSONAL_INFO.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${PERSONAL_INFO.email}`;
+    }
+  };
+
+  // Opens the visitor's mail app with the message filled in, so nothing depends on a third-party form service
+  const send = (e: FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Hello from ${name || "your portfolio"}`);
+    const body = encodeURIComponent(message);
+    window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`;
+  };
 
   return (
-    <section id="contact" ref={ref} className="relative z-10 py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+    <section id="contact" className="relative z-10 overflow-hidden pb-16 pt-28 sm:pt-40">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl font-display text-[clamp(2.6rem,8vw,7rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-coma"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-950/80 border border-sky-400/25 text-sky-300 text-xs font-mono uppercase tracking-widest mb-4 backdrop-blur-xl">
-            <MessageSquareCode size={14} className="text-sky-400" />
-            <span>Initiate Transmission</span>
+          Have something worth building?
+        </motion.h2>
+        <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+          I&apos;m open to AI engineering roles, founding teams and ambitious side projects. I usually reply within a day.
+        </p>
+
+        <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="space-y-8">
+            <div>
+              <p className="text-sm text-muted">Email</p>
+              <div className="mt-2 flex flex-wrap items-center gap-3">
+                <a
+                  href={`mailto:${PERSONAL_INFO.email}`}
+                  className="break-all font-display text-xl font-medium text-ice underline decoration-hair-strong underline-offset-8 transition-colors hover:decoration-ion sm:text-2xl"
+                >
+                  {PERSONAL_INFO.email}
+                </a>
+                <button
+                  onClick={copyEmail}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-hair-strong px-3 py-1.5 text-sm text-muted transition-colors hover:text-ice"
+                  aria-live="polite"
+                >
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.span
+                      key={copied ? "y" : "n"}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.15 }}
+                      className="inline-flex items-center gap-1.5"
+                    >
+                      {copied ? <Check size={14} className="text-ion" /> : <Copy size={14} />}
+                      {copied ? "Copied" : "Copy"}
+                    </motion.span>
+                  </AnimatePresence>
+                </button>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={PERSONAL_INFO.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-hair-strong px-5 py-2.5 text-sm text-ice transition-colors hover:border-ion/60"
+              >
+                <Linkedin size={16} /> LinkedIn
+              </a>
+              <a
+                href={PERSONAL_INFO.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-hair-strong px-5 py-2.5 text-sm text-ice transition-colors hover:border-ion/60"
+              >
+                <Github size={16} /> GitHub
+              </a>
+              <a
+                href={`tel:${PERSONAL_INFO.phone}`}
+                className="inline-flex items-center gap-2 rounded-full border border-hair-strong px-5 py-2.5 text-sm text-ice transition-colors hover:border-ion/60"
+              >
+                <Phone size={16} /> {PERSONAL_INFO.phone}
+              </a>
+            </div>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-['Space_Grotesk'] text-white">
-            Get In <span className="gradient-text">Touch</span>
-          </h2>
-          <div className="h-1 w-24 bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 mx-auto rounded-full mt-4"></div>
-          <p className="text-slate-400 mt-4 text-base sm:text-lg max-w-2xl mx-auto">
-            Open to discussing high-impact engineering roles, AI agent ventures, contract systems architecture, or competitive programming collaborations.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Contact Info Deck */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-5 space-y-6"
-          >
-            <div className="p-7 rounded-2xl bg-gradient-to-b from-slate-950/90 via-[#070c1f]/85 to-[#040715]/95 border border-slate-800/80 backdrop-blur-2xl shadow-xl space-y-6">
-              <h3 className="text-xl font-bold text-white font-['Space_Grotesk'] flex items-center gap-2">
-                <Terminal size={18} className="text-sky-400" />
-                <span>Direct Contact Channels</span>
-              </h3>
-
-              <div className="space-y-4">
-                {/* Email */}
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-sky-400/40 transition-colors">
-                  <div className="p-3 bg-sky-500/10 border border-sky-400/25 rounded-xl text-sky-400 flex-shrink-0">
-                    <Mail size={20} />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-mono text-slate-400 mb-0.5">Email Protocol</h4>
-                    <a
-                      href={`mailto:${PERSONAL_INFO.email}`}
-                      className="text-sm font-mono text-white hover:text-sky-300 transition-colors break-all"
-                    >
-                      {PERSONAL_INFO.email}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-indigo-400/40 transition-colors">
-                  <div className="p-3 bg-indigo-500/10 border border-indigo-400/25 rounded-xl text-indigo-400 flex-shrink-0">
-                    <Phone size={20} />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-mono text-slate-400 mb-0.5">Mobile Transmission</h4>
-                    <a
-                      href={`tel:${PERSONAL_INFO.phone}`}
-                      className="text-sm font-mono text-white hover:text-indigo-300 transition-colors"
-                    >
-                      {PERSONAL_INFO.phone}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Location */}
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-950/60 border border-slate-800">
-                  <div className="p-3 bg-slate-900 border border-slate-800 rounded-xl text-slate-300 flex-shrink-0">
-                    <MapPin size={20} />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-mono text-slate-400 mb-0.5">Primary Coordinates</h4>
-                    <p className="text-sm font-mono text-white">
-                      {PERSONAL_INFO.location}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Status Note */}
-              <div className="p-4 rounded-xl bg-sky-950/30 border border-sky-500/20 text-xs text-slate-300 leading-relaxed">
-                <span className="text-sky-400 font-mono font-semibold">Response Latency:</span> Typically replying within 12 hours. Feel free to ping via email or connect directly on LinkedIn.
-              </div>
+          <form onSubmit={send} className="panel space-y-5 rounded-[28px] p-6 sm:p-8">
+            <div>
+              <label htmlFor="c-name" className="text-sm text-muted">
+                Your name
+              </label>
+              <input
+                id="c-name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                autoComplete="name"
+                className="mt-2 w-full rounded-xl border border-hair bg-void/60 px-4 py-3 text-ice outline-none transition-colors placeholder:text-muted/50 focus:border-ion/60"
+                placeholder="Ada Lovelace"
+              />
             </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-7"
-          >
-            <div className="p-7 sm:p-8 rounded-2xl bg-gradient-to-b from-slate-950/90 via-[#070c1f]/85 to-[#040715]/95 border border-slate-800/80 backdrop-blur-2xl shadow-xl">
-              <ContactForm />
+            <div>
+              <label htmlFor="c-msg" className="text-sm text-muted">
+                Message
+              </label>
+              <textarea
+                id="c-msg"
+                required
+                rows={5}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="mt-2 w-full resize-none rounded-xl border border-hair bg-void/60 px-4 py-3 text-ice outline-none transition-colors placeholder:text-muted/50 focus:border-ion/60"
+                placeholder="What are you building?"
+              />
             </div>
-          </motion.div>
+            <button
+              type="submit"
+              className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-ice px-6 py-3.5 font-semibold text-void transition-transform hover:scale-[1.01] active:scale-[0.99]"
+            >
+              <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-ion/60 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <Send size={16} className="relative transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <span className="relative">Open in my email app</span>
+            </button>
+          </form>
         </div>
+      </div>
+
+      {/* Arrival: a planet's limb rising at the end of the journey */}
+      <div className="pointer-events-none relative mt-28 h-48 sm:h-64" aria-hidden="true">
+        <motion.div
+          initial={{ y: 120, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute left-1/2 top-0 aspect-square w-[260%] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_50%_0%,#121030,#05040b_30%)] shadow-[0_-2px_0_0_rgba(232,247,255,0.55),0_-20px_80px_-10px_rgba(111,211,255,0.45),0_-60px_160px_-20px_rgba(155,123,255,0.3)] sm:w-[180%]"
+        />
       </div>
     </section>
   );

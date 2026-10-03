@@ -1,62 +1,57 @@
-import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Unbounded, Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ThreeBackground from "@/components/ThreeBackground";
+import Starfield from "@/components/Starfield";
+import CursorTrail from "@/components/CursorTrail";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space",
-  display: "swap",
-});
+const unbounded = Unbounded({ subsets: ["latin"], variable: "--font-unbounded", display: "swap" });
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Akash Kumar Prasad | AI Engineer & Founding Engineer",
-  description: "Portfolio of Akash Kumar Prasad - Founding Engineer at RekZon, Ex-SWE Intern at FreeFlow Advisors, Pre-final year ECE at MNNIT Allahabad. LeetCode Knight (1887), Codeforces Specialist (1416), AI & Distributed Systems Architect.",
+  title: "Akash Kumar Prasad | AI Engineer",
+  description:
+    "Akash Kumar Prasad: AI Engineering Intern at Tectonic Agents, Founding Engineer at RekZon, ECE at MNNIT Allahabad. Builds RAG agents, voice AI and distributed systems. LeetCode Knight (1887), Codeforces Specialist (1416).",
   keywords: [
     "Akash Kumar Prasad",
+    "Tectonic Agents",
     "RekZon",
-    "Founding Engineer",
     "AI Engineer",
-    "GenAI",
     "RAG",
+    "LLM Agents",
     "MNNIT Allahabad",
     "Full Stack Developer",
     "LeetCode Knight",
     "Codeforces Specialist",
-    "MahabharatGPT",
-    "StockLabs",
-    "Clinico",
-    "Hirebotix",
   ],
   authors: [{ name: "Akash Kumar Prasad" }],
   openGraph: {
-    title: "Akash Kumar Prasad | AI Engineer & Founding Engineer",
-    description: "Founding Engineer @ RekZon | MNNIT Allahabad | LeetCode Knight (1887)",
+    title: "Akash Kumar Prasad | AI Engineer",
+    description: "AI Engineering Intern @ Tectonic Agents | Founding Engineer @ RekZon | MNNIT Allahabad",
     type: "website",
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  themeColor: "#05040b",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scroll-smooth dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased bg-[#050714] text-[#e2e8f0] selection:bg-cyan-500 selection:text-black`} suppressHydrationWarning>
-        <ThreeBackground />
+    <html lang="en" className={`${unbounded.variable} ${geist.variable} ${geistMono.variable}`} style={{ scrollBehavior: "smooth" }}>
+      <body suppressHydrationWarning>
+        <a
+          href="#experience"
+          className="sr-only z-[80] rounded-full bg-ice px-4 py-2 text-void focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Skip to content
+        </a>
+        <Starfield />
+        <CursorTrail />
         <Navbar />
-        <main className="relative z-10">
-          {children}
-        </main>
+        <main className="relative z-10">{children}</main>
         <Footer />
       </body>
     </html>

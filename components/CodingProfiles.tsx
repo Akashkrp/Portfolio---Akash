@@ -1,128 +1,102 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Trophy, Award, ExternalLink, Flame, TrendingUp, Sparkles } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { animate, motion, useInView } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { CODING_PROFILES } from "@/lib/constants";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import SectionHeading from "./SectionHeading";
 
-export default function CodingProfiles() {
-  const { ref, isInView } = useScrollReveal();
+function CountUp({ to }: { to: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(0, to, {
+      duration: 2.2,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (v) => setValue(Math.round(v)),
+    });
+    return () => controls.stop();
+  }, [inView, to]);
 
   return (
-    <section id="coding-profiles" ref={ref} className="relative z-10 py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-950/80 border border-sky-400/25 text-sky-300 text-xs font-mono uppercase tracking-widest mb-4 backdrop-blur-xl">
-            <Trophy size={14} className="text-sky-400" />
-            <span>Competitive Programming & Problem Solving</span>
-          </div>
+    <span ref={ref} aria-label={String(to)}>
+      {value}
+    </span>
+  );
+}
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-['Space_Grotesk'] text-white">
-            Badges of <span className="gradient-text">Algorithmic Honor</span>
-          </h2>
-          <div className="h-1 w-24 bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 mx-auto rounded-full mt-4"></div>
-          <p className="text-slate-400 mt-4 text-base sm:text-lg max-w-2xl mx-auto">
-            Consistently competing against the world&apos;s sharpest engineers in international contests and algorithmic challenges with over 1000+ verified problem solutions.
-          </p>
-        </motion.div>
+export default function CodingProfiles() {
+  return (
+    <section id="coding-profiles" className="relative z-10 py-28 sm:py-40">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          title="Contest ratings"
+          intro="Over a thousand problems solved. Algorithms are how I learned to think about systems."
+        />
 
-        {/* Profiles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {CODING_PROFILES.map((profile, index) => {
-            const isLeetCode = profile.platform === "LeetCode";
-            const accentGradient = isLeetCode
-              ? "from-sky-500 via-blue-600 to-indigo-600"
-              : "from-indigo-500 via-purple-600 to-violet-600";
-            const borderHover = isLeetCode ? "hover:border-sky-400/60" : "hover:border-indigo-400/60";
-
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          {CODING_PROFILES.map((p, i) => {
+            const ion = p.accent === "sky";
             return (
               <motion.a
-                key={profile.platform}
-                href={profile.url}
+                key={p.platform}
+                href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                whileHover={{ y: -6, scale: 1.01 }}
-                className={`group relative p-8 rounded-3xl bg-gradient-to-b from-slate-950/90 via-[#070b1f]/85 to-[#040714]/95 border border-slate-800/90 ${borderHover} transition-all duration-300 backdrop-blur-2xl shadow-2xl flex flex-col justify-between overflow-hidden`}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="panel group relative overflow-hidden rounded-[28px] p-8 sm:p-10"
               >
-                {/* Celestial ambient glow */}
+                {/* slow orbit decoration behind the number */}
                 <div
-                  className={`absolute -right-20 -top-20 w-48 h-48 rounded-full bg-gradient-to-br ${accentGradient} opacity-10 group-hover:opacity-25 blur-3xl transition-opacity duration-500`}
-                />
-
-                <div>
-                  {/* Card Header */}
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`p-3.5 rounded-2xl bg-gradient-to-br ${accentGradient} text-white shadow-lg`}
-                      >
-                        {isLeetCode ? <Trophy size={26} /> : <Award size={26} />}
-                      </div>
-                      <div>
-                        <span className="text-xs font-mono text-sky-400 uppercase tracking-widest block">
-                          Official Profile
-                        </span>
-                        <h3 className="text-2xl font-bold text-white font-['Space_Grotesk']">
-                          {profile.platform}
-                        </h3>
-                      </div>
-                    </div>
-
-                    <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 group-hover:text-sky-300 group-hover:border-sky-500/40 transition-colors">
-                      <ExternalLink size={17} />
-                    </div>
-                  </div>
-
-                  {/* Highlights Banner */}
-                  <div className="mb-6 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/90 text-xs font-mono text-slate-300 flex items-center gap-2.5">
-                    <Flame size={16} className={isLeetCode ? "text-sky-400" : "text-indigo-400"} />
-                    <span>{profile.highlight}</span>
-                  </div>
-
-                  {/* Metrics Deck */}
-                  <div className="grid grid-cols-3 gap-3 mb-6">
-                    <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-                      <span className="text-[11px] font-mono text-slate-400 block mb-0.5">Tier Rank</span>
-                      <span className="text-base sm:text-lg font-bold text-white font-mono">
-                        {profile.tier}
-                      </span>
-                    </div>
-
-                    <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-                      <span className="text-[11px] font-mono text-slate-400 block mb-0.5">Rating</span>
-                      <span className="text-base sm:text-lg font-bold text-sky-300 font-mono">
-                        {profile.rating}
-                      </span>
-                    </div>
-
-                    <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
-                      <span className="text-[11px] font-mono text-slate-400 block mb-0.5">Problems Solved</span>
-                      <span className="text-base sm:text-lg font-bold text-indigo-300 font-mono">
-                        {profile.problemsSolved}
-                      </span>
-                    </div>
-                  </div>
+                  className={`pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full border border-dashed ${
+                    ion ? "border-ion/20" : "border-nebula/25"
+                  } orbit-spin`}
+                  style={{ ["--orbit-duration" as string]: "40s" }}
+                  aria-hidden="true"
+                >
+                  <span
+                    className={`absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full ${
+                      ion ? "bg-ion shadow-[0_0_12px_4px_rgba(111,211,255,0.7)]" : "bg-nebula shadow-[0_0_12px_4px_rgba(155,123,255,0.7)]"
+                    }`}
+                  />
                 </div>
 
-                {/* Footer Bar */}
-                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400">
-                  <span className="group-hover:text-sky-400 transition-colors">
-                    handle: @{profile.username}
-                  </span>
-                  <span className="flex items-center gap-1 text-slate-500 group-hover:text-white transition-colors">
-                    <span>View verified telemetry</span>
-                    <TrendingUp size={13} />
-                  </span>
+                <div className="relative flex items-start justify-between">
+                  <div>
+                    <p className="font-display text-xl font-medium text-ice">{p.platform}</p>
+                    <p className="mt-1 font-mono text-sm text-muted">@{p.username}</p>
+                  </div>
+                  <ArrowUpRight
+                    size={22}
+                    className="text-muted transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-ice"
+                  />
                 </div>
+
+                <p className={`relative mt-10 font-display text-7xl font-semibold tracking-tighter sm:text-8xl ${ion ? "text-coma" : "text-ice"}`}>
+                  <CountUp to={p.rating} />
+                </p>
+                <p className="relative mt-2 text-muted">peak contest rating</p>
+
+                <dl className="relative mt-8 grid grid-cols-3 gap-4 border-t border-hair pt-6 text-sm">
+                  <div>
+                    <dt className="text-muted">Tier</dt>
+                    <dd className="mt-1 text-ice">{p.tier}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-muted">Solved</dt>
+                    <dd className="mt-1 text-ice">{p.problemsSolved}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-muted">Standing</dt>
+                    <dd className="mt-1 text-dust">{p.badge}</dd>
+                  </div>
+                </dl>
               </motion.a>
             );
           })}

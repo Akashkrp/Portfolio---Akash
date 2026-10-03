@@ -1,124 +1,205 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 :root {
-  /* Deep Space Cosmic Void */
-  --background: #030612;
-  --foreground: #f1f5f9;
-  
-  /* Celestial Space Tokens */
-  --space-card: rgba(8, 14, 36, 0.72);
-  --space-border: rgba(125, 211, 252, 0.14);
-  --starlight-white: #ffffff;
-  --pulsar-cyan: #38bdf8;
-  --nebula-indigo: #818cf8;
-  --stellar-gold: #f59e0b;
+  --void: #05040b;
+  --void-2: #0a0916;
+  --ice: #e8f7ff;
+  --ion: #6fd3ff;
+  --dust: #f5b971;
+  --nebula: #9b7bff;
+  --text: #dfe4f5;
+  --muted: #8a90ab;
+  --hair: rgba(232, 247, 255, 0.09);
+  --hair-strong: rgba(232, 247, 255, 0.18);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-pulsar-cyan: var(--pulsar-cyan);
-  --color-nebula-indigo: var(--nebula-indigo);
-  --color-stellar-gold: var(--stellar-gold);
-  
-  /* Fonts */
-  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-space: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --color-void: var(--void);
+  --color-void-2: var(--void-2);
+  --color-ice: var(--ice);
+  --color-ion: var(--ion);
+  --color-dust: var(--dust);
+  --color-nebula: var(--nebula);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-hair: var(--hair);
+  --color-hair-strong: var(--hair-strong);
+
+  --font-display: var(--font-unbounded), system-ui, sans-serif;
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-/* Smooth Scrolling & Space Dark Base */
 html {
-  scroll-behavior: smooth;
   color-scheme: dark;
+  background: var(--void);
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter);
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--font-sans);
   overflow-x: hidden;
-  position: relative;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle Cosmic Stardust Background Fog */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: 
-    radial-gradient(circle at 50% 15%, rgba(56, 189, 248, 0.05) 0%, transparent 65%),
-    radial-gradient(circle at 85% 60%, rgba(99, 102, 241, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 15% 80%, rgba(245, 158, 11, 0.025) 0%, transparent 45%);
-  pointer-events: none;
-  z-index: 0;
+::selection {
+  background: var(--ion);
+  color: var(--void);
 }
 
-/* Celestial Scrollbar */
+:focus-visible {
+  outline: 2px solid var(--ion);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 8px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #02040b;
+  background: var(--void);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #38bdf8 0%, #818cf8 100%);
-  border-radius: 4px;
+  background: linear-gradient(180deg, var(--ion), var(--nebula) 60%, var(--dust));
+  border-radius: 8px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #7dd3fc;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
-}
-
-/* Natural Celestial Space Gradients (No synthetic oversaturated AI looks) */
-.gradient-text {
-  background: linear-gradient(135deg, #ffffff 15%, #93c5fd 55%, #c084fc 100%);
+/* Text that glows like a comet's coma: ice core fading into ion blue */
+.text-coma {
+  background: linear-gradient(100deg, #ffffff 0%, var(--ice) 35%, var(--ion) 70%, var(--nebula) 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
-.gradient-starlight {
-  background: linear-gradient(135deg, #ffffff 10%, #e0f2fe 50%, #93c5fd 100%);
+.text-dust {
+  background: linear-gradient(100deg, #fff6e6 0%, var(--dust) 70%, #e08a4a 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
-.gradient-gold {
-  background: linear-gradient(135deg, #ffffff 0%, #fef08a 60%, #f59e0b 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Glass panel used for content surfaces over the starfield */
+.panel {
+  background: linear-gradient(180deg, rgba(16, 15, 34, 0.72), rgba(8, 7, 20, 0.78));
+  border: 1px solid var(--hair);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
-/* Cosmic Nebula Ambient Glows */
-@keyframes cosmicAura {
+/* Cursor-tracked spotlight inside project cards (uses --mx / --my set from JS) */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(111, 211, 255, 0.13), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+  z-index: -1;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(111, 211, 255, 0.75), rgba(155, 123, 255, 0.35) 40%, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+.spotlight:hover::before,
+.spotlight:hover::after {
+  opacity: 1;
+}
+
+/* Orbit rotation for the skills system */
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes counter-orbit {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+.orbit-spin {
+  animation: orbit var(--orbit-duration, 60s) linear infinite;
+}
+.orbit-counter {
+  animation: counter-orbit var(--orbit-duration, 60s) linear infinite;
+}
+.orbit-paused .orbit-spin,
+.orbit-paused .orbit-counter {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes pulse-ring {
   0% {
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15), 0 0 40px rgba(129, 140, 248, 0.1);
+    transform: scale(0.6);
+    opacity: 0.9;
   }
   100% {
-    box-shadow: 0 0 35px rgba(56, 189, 248, 0.3), 0 0 70px rgba(129, 140, 248, 0.2);
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.pulse-ring {
+  animation: pulse-ring 2.2s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }
 
-.animate-cosmic-glow {
-  animation: cosmicAura 3.5s ease-in-out infinite alternate;
+/* A meteor streaks along the row's top edge on hover */
+.meteor-row {
+  position: relative;
+  overflow: hidden;
 }
-
-/* Space Glassmorphism Card Utility */
-.space-card {
-  background: rgba(8, 14, 36, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(125, 211, 252, 0.14);
+.meteor-row::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(111, 211, 255, 0.2) 60%, #ffffff);
+  box-shadow: 0 0 8px rgba(111, 211, 255, 0.8);
+  transform: translateX(-110%);
+  opacity: 0;
 }
-
-.space-card:hover {
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1);
+.meteor-row:hover::after {
+  opacity: 1;
+  transform: translateX(260%);
+  transition: transform 0.9s cubic-bezier(0.3, 0, 0.2, 1), opacity 0.2s;
 }

@@ -9,7 +9,7 @@ import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
-    <div className="relative">
+    <>
       <Hero />
       <Experience />
       <Projects />
@@ -18,6 +18,6 @@ export default function Home() {
       <Achievements />
       <About />
       <Contact />
-    </div>
+    </>
   );
 }
